@@ -1,12 +1,67 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import UserDisplay from './components/UserDisplay';
+import SearchBar from './components/SearchBar';
+import generateRandomUsers from './generateFakeUsers';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// faker.seed(100);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+class App extends React.Component {
+
+    state = {users: [], matchedUsers: []};
+
+    componentDidMount() {
+        this.setState({ users: generateRandomUsers })
+        console.log(generateRandomUsers)
+    }
+
+    onSearchSubmit = (data) => {
+        const matchedUsers = [];
+        if(data.searchBy === 'firstName') {
+            this.state.users.map((user) => {
+                if(user.firstName === data.term) {
+                    matchedUsers.push(user);
+                }
+            });
+        }
+        else if(data.searchBy === 'lastName') {
+            this.state.users.map((user) => {
+                if(user.lastName === data.term) {
+                    matchedUsers.push(user);
+                }
+            });
+        }
+        else if(data.searchBy === 'phone') {
+            this.state.users.map((user) => {
+                if(user.phone === data.term) {
+                    matchedUsers.push(user);
+                }
+            });
+        }
+        else if(data.searchBy === 'email') {
+            this.state.users.map((user) => {
+                if(user.email === data.term) {
+                    matchedUsers.push(user);
+                }
+            });
+        }
+
+        this.setState({matchedUsers: matchedUsers});
+    };
+
+    render() {
+        return(
+            <div className="ui container">
+                <SearchBar onSubmit={this.onSearchSubmit}/>
+                {this.state.matchedUsers.map((user) => {
+                    return <UserDisplay key={user.id} user={user}/>
+                })}
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <App />,
+    document.querySelector('#root')
+);
