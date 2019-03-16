@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import UserDisplay from './components/UserDisplay';
 import SearchBar from './components/SearchBar';
-import generateRandomUsers from './generateFakeUsers';
+import axios from 'axios';
 
 // faker.seed(100);
 
@@ -11,8 +11,10 @@ class App extends React.Component {
     state = {users: [], matchedUsers: []};
 
     componentDidMount() {
-        this.setState({ users: generateRandomUsers })
-        console.log(generateRandomUsers)
+        axios.get('./users.json').then((res) => {
+            this.setState({users: res.data});
+            // console.log(res);
+        }).catch((err) => console.log(err));
     }
 
     onSearchSubmit = (data) => {

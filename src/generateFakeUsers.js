@@ -18,7 +18,8 @@ const generateRandomUsers = () => {
 
         usersArray.push(user);
     }
-    return usersArray;
+    let userData = JSON.stringify(usersArray);
+    return userData;
 };
 
 export default generateRandomUsers();
