@@ -20,5 +20,4 @@ Install all the dependencies from the package.json file.
 
 1) Run `npm install`
 2) Run `npm start`
-3) Open the console of the browser which will the the array of fake users generated
-4) Search using data of any one of the fake users
+3) Search using data of any one of the fake users from the user.json file
