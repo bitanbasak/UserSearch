@@ -19,30 +19,27 @@ class App extends React.Component {
 
     onSearchSubmit = (data) => {
         const matchedUsers = [];
-        if(data.searchBy === 'firstName') {
+        if (data.searchBy === 'firstName') {
             this.state.users.map((user) => {
-                if(user.firstName === data.term) {
+                if (user.firstName === data.term) {
                     matchedUsers.push(user);
                 }
             });
-        }
-        else if(data.searchBy === 'lastName') {
+        } else if (data.searchBy === 'lastName') {
             this.state.users.map((user) => {
-                if(user.lastName === data.term) {
+                if (user.lastName === data.term) {
                     matchedUsers.push(user);
                 }
             });
-        }
-        else if(data.searchBy === 'phone') {
+        } else if (data.searchBy === 'phone') {
             this.state.users.map((user) => {
-                if(user.phone === data.term) {
+                if (user.phone === data.term) {
                     matchedUsers.push(user);
                 }
             });
-        }
-        else if(data.searchBy === 'email') {
+        } else if (data.searchBy === 'email') {
             this.state.users.map((user) => {
-                if(user.email === data.term) {
+                if (user.email === data.term) {
                     matchedUsers.push(user);
                 }
             });
@@ -52,7 +49,7 @@ class App extends React.Component {
     };
 
     render() {
-        return(
+        return (
             <div className="ui container">
                 <SearchBar onSubmit={this.onSearchSubmit}/>
                 {this.state.matchedUsers.map((user) => {
@@ -64,6 +61,6 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-    <App />,
+    <App/>,
     document.querySelector('#root')
 );
