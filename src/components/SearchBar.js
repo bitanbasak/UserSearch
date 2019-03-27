@@ -1,48 +1,72 @@
 import React from 'react';
+import { Segment, Form, Button } from 'semantic-ui-react';
 
 class SearchBar extends React.Component {
 
     state = {
         term: '',
-        searchBy: ''
+        searchBy: '',
+        options: [{
+            key: 'firstName',
+            text: 'First Name',
+            value: 'firstName'
+        },
+        {
+            key: 'lastName',
+            text: 'Last Name',
+            value: 'lastName'
+        },
+        {
+            key: 'email',
+            text: 'Email',
+            value: 'email'
+        },
+        {
+            key: 'phone',
+            text: 'Phone',
+            value: 'phone'
+        }]
     };
 
     onFormSubmit = (event) => {
         event.preventDefault();
+        console.log(this.state.term);
+        console.log(this.state.searchBy);
 
         this.props.onSubmit(this.state);
     };
 
     render() {
         return (
-            <div className="ui segment">
-                <form className="ui form" onSubmit={this.onFormSubmit}>
-                    <div className="field">
-                        <label htmlFor="searchInput">Search Term</label>
-                        <input
+            <Segment>
+                <Form onSubmit={this.onFormSubmit}>
+                    <Form.Field>
+                        <Form.Input
                             id="searchInput"
                             type="text"
+                            label="Search Term"
                             value={this.state.term}
                             onChange={(event) => this.setState({term: event.target.value})}
                         />
-                    </div>
-                    <div className="field">
-                        <label htmlFor="searchBy">Search By</label>
-                        <select
+                    </Form.Field>
+                    <Form.Field>
+                        <Form.Select
                             id="searchBy"
                             name="search_using"
+                            placeholder="Search By..."
                             defaultValue={this.state.searchBy}
-                            onChange={(event) => this.setState({searchBy: event.target.value})}>
-                            <option value="undefined">--</option>
+                            onChange={(event, { value }) => this.setState({searchBy: value})} 
+                            options={this.state.options}/>
+                            {/* <option value="undefined">--</option>
                             <option value="firstName">First Name</option>
                             <option value="lastName">Last Name</option>
                             <option value="phone">Phone</option>
                             <option value="email">Email</option>
-                        </select>
-                    </div>
-                    <button type="submit" className="ui primary button">Submit</button>
-                </form>
-            </div>);
+                        </Form.Select> */}
+                    </Form.Field>
+                    <Button type="submit">Submit</Button>
+                </Form>
+            </Segment>);
     }
 }
 

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import UserDisplay from './components/UserDisplay';
 import SearchBar from './components/SearchBar';
 import axios from 'axios';
+import 'semantic-ui/dist/semantic.min.css';
+import { Container } from 'semantic-ui-react';
 
 // faker.seed(100);
 
@@ -50,12 +52,12 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="ui container">
+            <Container>
                 <SearchBar onSubmit={this.onSearchSubmit}/>
                 {this.state.matchedUsers.map((user) => {
                     return <UserDisplay key={user.id} user={user}/>
                 })}
-            </div>
+            </Container>
         );
     }
 }
